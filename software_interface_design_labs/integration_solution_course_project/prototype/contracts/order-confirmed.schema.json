@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/contracts/order-confirmed.schema.json",
+  "title": "OrderConfirmed",
+  "type": "object",
+  "required": ["eventId", "eventType", "occurredAt", "orderId", "customerId", "totalMinor", "currency"],
+  "properties": {
+    "eventId": {"type": "string", "format": "uuid"},
+    "eventType": {"const": "OrderConfirmed"},
+    "occurredAt": {"type": "string", "format": "date-time"},
+    "orderId": {"type": "string", "format": "uuid"},
+    "customerId": {"type": "string", "minLength": 1},
+    "totalMinor": {"type": "integer", "minimum": 1},
+    "currency": {"const": "RUB"}
+  },
+  "additionalProperties": false
+}

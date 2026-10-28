@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/contracts/order-created.schema.json",
+  "title": "OrderCreated",
+  "type": "object",
+  "required": ["eventId", "eventType", "occurredAt", "orderId", "customerId", "currency", "totalMinor", "items"],
+  "properties": {
+    "eventId": {"type": "string", "format": "uuid"},
+    "eventType": {"const": "OrderCreated"},
+    "occurredAt": {"type": "string", "format": "date-time"},
+    "orderId": {"type": "string", "format": "uuid"},
+    "customerId": {"type": "string", "minLength": 1},
+    "currency": {"const": "RUB"},
+    "totalMinor": {"type": "integer", "minimum": 1, "description": "Сумма в копейках"},
+    "items": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["sku", "quantity", "unitPriceMinor"], "properties": {"sku": {"type": "string"}, "quantity": {"type": "integer", "minimum": 1}, "unitPriceMinor": {"type": "integer", "minimum": 0}}}}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,38 @@
+asyncapi: 3.0.0
+info:
+  title: Order Integration Events
+  version: 1.0.0
+  description: Contracts for order events exchanged by the shop integration layer.
+defaultContentType: application/json
+channels:
+  orderCreated:
+    address: orders.created
+    messages:
+      orderCreated:
+        $ref: '#/components/messages/OrderCreated'
+  orderConfirmed:
+    address: orders.confirmed
+    messages:
+      orderConfirmed:
+        $ref: '#/components/messages/OrderConfirmed'
+operations:
+  publishOrderCreated:
+    action: send
+    channel:
+      $ref: '#/channels/orderCreated'
+  publishOrderConfirmed:
+    action: send
+    channel:
+      $ref: '#/channels/orderConfirmed'
+components:
+  messages:
+    OrderCreated:
+      name: OrderCreated
+      title: Order created
+      payload:
+        $ref: './contracts/order-created.schema.json'
+    OrderConfirmed:
+      name: OrderConfirmed
+      title: Order confirmed after successful payment
+      payload:
+        $ref: './contracts/order-confirmed.schema.json'
